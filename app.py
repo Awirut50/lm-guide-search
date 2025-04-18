@@ -8,7 +8,11 @@ uploaded_file = st.file_uploader("📤 อัปโหลดไฟล์ Excel �
 
 if uploaded_file:
     try:
-        df = pd.read_excel(uploaded_file)
+        df = pd.read_excel(uploaded_file, engine="openpyxl")
+
+# ลองแสดง preview เผื่อช่วย debug ได้ง่ายขึ้น
+st.subheader("📑 Preview ข้อมูลที่อัปโหลด")
+st.dataframe(df.head(), use_container_width=True)
 
         col1, col2, col3, col4 = st.columns(4)
         with col1:
