@@ -16,14 +16,14 @@ if uploaded_file:
         st.dataframe(df.head(), use_container_width=True)
 
         # ช่องค้นหาทั้ง 4 ช่อง
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col5, col6 = st.columns(4)
         with col1:
             model_query = st.text_input("Model")
         with col2:
             m_query = st.text_input("M")
-        with col3:
+        with col5:
             b_query = st.text_input("B")
-        with col4:
+        with col6:
             c_query = st.text_input("C")
 
         # กรองข้อมูลตาม input
