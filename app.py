@@ -8,12 +8,14 @@ uploaded_file = st.file_uploader("📤 อัปโหลดไฟล์ Excel �
 
 if uploaded_file:
     try:
+        # โหลดข้อมูลจากไฟล์ Excel
         df = pd.read_excel(uploaded_file, engine="openpyxl")
 
-# ลองแสดง preview เผื่อช่วย debug ได้ง่ายขึ้น
-st.subheader("📑 Preview ข้อมูลที่อัปโหลด")
-st.dataframe(df.head(), use_container_width=True)
+        # แสดง preview คอลัมน์
+        st.subheader("📑 Preview ข้อมูลที่อัปโหลด")
+        st.dataframe(df.head(), use_container_width=True)
 
+        # ช่องค้นหาทั้ง 4 ช่อง
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             model_query = st.text_input("Model")
@@ -24,6 +26,7 @@ st.dataframe(df.head(), use_container_width=True)
         with col4:
             c_query = st.text_input("C")
 
+        # กรองข้อมูลตาม input
         filtered_df = df.copy()
         if model_query:
             filtered_df = filtered_df[filtered_df['Model'].astype(str).str.contains(model_query, case=False, na=False)]
@@ -34,9 +37,11 @@ st.dataframe(df.head(), use_container_width=True)
         if c_query:
             filtered_df = filtered_df[filtered_df['C'].astype(str).str.contains(c_query, case=False, na=False)]
 
+        # แสดงผลลัพธ์
         st.markdown(f"### 📋 ผลลัพธ์ ({len(filtered_df)} รายการ)")
         st.dataframe(filtered_df, use_container_width=True)
 
+        # ปุ่มดาวน์โหลด
         if not filtered_df.empty:
             csv = filtered_df.to_csv(index=False).encode('utf-8-sig')
             st.download_button("⬇️ ดาวน์โหลดผลลัพธ์เป็น CSV", data=csv, file_name="lm_guide_search_result.csv", mime='text/csv')
