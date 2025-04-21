@@ -24,14 +24,14 @@ if uploaded_file:
         st.dataframe(df.head(), use_container_width=True)
 
         # ช่องค้นหา
-        col1, col2, col5, col6 = st.columns(4)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             model_query = st.text_input("Model")
         with col2:
             m_query = st.text_input("M")
-        with col5:
+        with col3:
             b_query = st.text_input("B")
-        with col6:
+        with col4:
             c_query = st.text_input("C")
 
         filtered_df = df.copy()
